@@ -46,14 +46,14 @@ The House Hunt project is licensed under the [MIT License](https://github.com/gi
 
 ## Acknowledgments
 
-* [PHP](https://www.php.net/)-A popular general-purpose scripting language that is especially suited to web development.
+* [PHP](https://www.php.net/) - A popular general-purpose scripting language that is especially suited to web development.
 * [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - CSS framework for styling the project.
-* [jQuery](https://jquery.com/)-JavaScript library for enhanced interactivity.
+* [jQuery](https://jquery.com/) - JavaScript library for enhanced interactivity.
 
 
 <!-- CONTACT -->
 ## Contact
 
-If you have any questions or inquiries about the House Hunt project, please contact  [Antony Kilonzo Wambua](mailto.anatoli@devlan.co.ke) .
+If you have any questions or inquiries about the House Hunt project, please contact  [Antony Kilonzo Wambua]-anatoli@devlan.co.ke.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
