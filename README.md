@@ -54,6 +54,6 @@ The House Hunt project is licensed under the [MIT License](https://github.com/gi
 <!-- CONTACT -->
 ## Contact
 
-If you have any questions or inquiries about the House Hunt project, please contact  [Antony Kilonzo Wambua]-anatoli@devlan.co.ke.
+If you have any questions or inquiries about the House Hunt project, please contact  Antony Kilonzo Wambua-anatoli@devlan.co.ke.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
