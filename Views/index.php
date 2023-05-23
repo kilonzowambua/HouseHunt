@@ -187,7 +187,7 @@
                 <div class="col-lg-4">
                     <div class="widget">
                         <h3>About</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.</p>
+                        <p>House Hunt is an online platform or website designed to help individuals search for and find their ideal homes. It provides a centralized database of real estate listings, allowing users to browse through a wide range of properties such as houses, apartments, condos, and more.</p>
                     </div>
                     <div class="widget">
                         <h3>Connect with us</h3>
@@ -242,7 +242,7 @@
 
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+                        </script> All rights reserved | House Hunt project is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href=" https://kilonzowambua.github.io" target="_blank">Antony Kilonzo Wambua</a>
                     </p>
                 </div>
             </div>
