@@ -39,7 +39,7 @@
                     <div id="typewriter"></div>
                     <a href="" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200"> Get Started</a>
                 </div>
-               
+
             </div>
             <div class="hero_img" data-aos="fade-up" data-aos-delay="300">
                 <img src="../Public/Landing/images/10297015_4387144.png" alt="Image" class="img-fluid">
@@ -47,69 +47,83 @@
         </div>
         <div class="slant" style="background-image: url('../Public/Landing/images/slant.svg');"></div>
     </div>
-  
+
     <div class="features-section">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="section-title col-lg-7" data-aos="fade-up" data-aos-delay="0">
-                    <strong class="subtitle d-block">Awesome Features</strong>
-                    <h2 class="heading font-weight-bold">Cool Features</h2>
-                    <p class="description text-grey">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                    <strong class="subtitle d-block">House Features</strong>
+                    <h2 class="heading font-weight-bold">Top House</h2>
+
                 </div>
             </div>
-            <div class="row gutter-v1">
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/002-coins.svg" alt="Image" class="img-fluid">
+            <div class="row align-items-stretch">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-entry h-100">
+                        <a href="#" style="background-image: url('../Public/Landing/images/pexels-binyamin-mellish-1396122.jpg')"></a>
+                        <div class="bg-white m-body">
+                            <span class="date">May 14, 2020</span>
+                            <h3><a href="#">Cozy Cottage</a></h3>
+                            <h6>House type:Cottage</h6>
+                            <h6>House Location:</h6>
+                            <h6>House Rent:</h6>
+                            <p>This charming and cozy cottage offers a warm and inviting atmosphere. It features a quaint design, comfortable living spaces, and a peaceful ambiance, perfect for those seeking a retreat-like setting.</p>
+                            <a href="#" class="more d-flex align-items-center float-right">
+                                <span class="label">Read More</span>
+                                <span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
+                            </a>
                         </div>
-                        <h3>Cash Collection</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
                     </div>
                 </div>
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/001-stats.svg" alt="Image" class="img-fluid">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-entry h-100">
+                        <a href="#" style="background-image: url('../Public/Landing/images/pexels-binyamin-mellish-1396132.jpg')"></a>
+                        <div class="bg-white m-body">
+                            <span class="date">May 14, 2020</span>
+                            <h3><a href="#">Modern Marvel</a></h3>
+                            <h6>House type:Modern Home</h6>
+                            <h6>House Location:</h6>
+                            <h6>House Rent:</h6>
+                            <p>Step into the future with this modern marvel. This house boasts sleek lines, contemporary architecture, and cutting-edge amenities. It is designed for those who appreciate the latest trends and technology.</p>
+                            <a href="#" class="more d-flex align-items-center float-right">
+                                <span class="label">Read More</span>
+                                <span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
+                            </a>
                         </div>
-                        <h3>Analytics</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
                     </div>
                 </div>
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/006-garage.svg" alt="Image" class="img-fluid">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-entry h-100">
+                        <a href="#" style="background-image: url('../Public/Landing/images/pexels-clay-elliot-5524165.jpg')"></a>
+                        <div class="bg-white m-body">
+                            <span class="date">May 14, 2020</span>
+                            <h3><a href="#">Tranquil Haven</a></h3>
+                            <h6>House type:Haven</h6>
+                            <h6>House Location:</h6>
+                            <h6>House Rent:</h6>
+                            <p>Experience tranquility in this haven-like home. Surrounded by nature or tucked away in a quiet neighborhood, this house offers a serene escape from the hustle and bustle of everyday life</p>
+                            <a href="#" class="more d-flex align-items-center float-right">
+                                <span class="label">Read More</span>
+                                <span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
+                            </a>
                         </div>
-                        <h3>Payment</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
                     </div>
                 </div>
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/004-notebook.svg" alt="Image" class="img-fluid">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-entry h-100">
+                        <a href="#" style="background-image: url('../Public/Landing/images/pexels-clay-elliot-5524265.jpg')"></a>
+                        <div class="bg-white m-body">
+                            <span class="date">May 14, 2020</span>
+                            <h3><a href="#">Serene Sanctuary</a></h3>
+                            <h6>House type:Sanctuary</h6>
+                            <h6>House Location:</h6>
+                            <h6>House Rent:</h6>
+                            <p> Find peace and serenity in this sanctuary. With its calming ambiance, beautiful landscaping, and harmonious design, this home provides a tranquil space to relax and unwind.</p>
+                            <a href="#" class="more d-flex align-items-center float-right">
+                                <span class="label">Read More</span>
+                                <span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
+                            </a>
                         </div>
-                        <h3>Cash Collection</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
-                    </div>
-                </div>
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/003-gold-ingots.svg" alt="Image" class="img-fluid">
-                        </div>
-                        <h3>Analytics</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
-                    </div>
-                </div>
-                <div class="text-center text-md-left col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature">
-                        <div class="img-wrap">
-                            <img src="images/flaticon/svg/005-brochure.svg" alt="Image" class="img-fluid">
-                        </div>
-                        <h3>Payment</h3>
-                        <p>Manage your invoces from creation to payment. With Upflow you'll collect 100% of.</p>
                     </div>
                 </div>
             </div>
@@ -179,7 +193,7 @@
             </div>
         </div>
     </div>
-  
+
     <div class="site-footer">
         <div class="container">
             <div class="row justify-content-between">
@@ -217,7 +231,7 @@
                         <div class="col-6 col-sm-6 col-md-4">
                             <div class="widget">
                                 <ul class="links list-unstyled">
-                                
+
                                     <li><a href="#">Contact</a></li>
                                     <li><a href="#">Privacy</a></li>
                                 </ul>
@@ -228,7 +242,7 @@
                                 <ul class="links list-unstyled">
                                     <li><a href="#">Privacy</a></li>
                                     <li><a href="#">FAQ</a></li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -253,15 +267,15 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    
+
     <?php include('../Partial/landing/script.php'); ?>
     <script type="text/javascript">
-    const instance = new Typewriter('#typewriter', {
-      strings: ['<p class="text-white mb-4" id="headline" data-aos="fade-up" data-aos-delay="100">Search, Giggle, and Book Your Dream House with House Hunt.Start Your Giggle-Filled House Hunt Now!</p>'],
-      autoStart: true,
-      loop: true,
-    });
-  </script>
+        const instance = new Typewriter('#typewriter', {
+            strings: ['<p class="text-white mb-4" id="headline" data-aos="fade-up" data-aos-delay="100">Search, Giggle, and Book Your Dream House with House Hunt.Start Your Giggle-Filled House Hunt Now!</p>'],
+            autoStart: true,
+            loop: true,
+        });
+    </script>
 </body>
 
 </html>
