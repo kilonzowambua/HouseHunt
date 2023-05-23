@@ -135,52 +135,39 @@
                 <div class="col-lg-4 mb-5 section-title" data-aos="fade-up" data-aos-delay="0">
                     <strong class="subtitle d-block">Join Now</strong>
                     <h2 class="mb-4 font-weight-bold heading">Join More Than <strong>90,000+</strong> Amazing People Loves Our Product</h2>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-                    <p><a href="#" class="btn btn-primary">Product Tour</a></p>
+                    <p class="mb-4">House Hunt offers various marketing tools and features to showcase the listed property effectively. This includes high-quality photos, detailed descriptions, virtual tours, and interactive features, enabling house owners to present their property in the best possible light and attract more attention. </p>
+                    <p><a href="#" class="btn btn-primary">Join</a></p>
                 </div>
                 <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
                     <div class="testimonial--wrap">
                         <div class="owl-single owl-carousel no-dots no-nav">
+                            
                             <div class="testimonial-item">
                                 <div class="d-flex align-items-center mb-4">
                                     <div class="photo mr-3">
-                                        <img src="images/person_4.jpg" alt="Image" class="img-fluid">
+                                        <img src="../Public/Landing/images/pexels-nathan-cowley-1300402.jpg" alt="Image" class="img-fluid">
                                     </div>
                                     <div class="author">
-                                        <cite class="d-block mb-0">Kaila Woodland</cite>
-                                        <span>Owner, Greenland, Inc.</span>
+                                        <cite class="d-block mb-0">John Smith</cite>
+                                        <span>Owner, Sunnyville, Inc.</span>
                                     </div>
                                 </div>
                                 <blockquote>
-                                    <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
+                                    <p>&ldquo;Joining House Hunt was the best decision I made when selling my house&rdquo;</p>
                                 </blockquote>
                             </div>
                             <div class="testimonial-item">
                                 <div class="d-flex align-items-center mb-4">
                                     <div class="photo mr-3">
-                                        <img src="images/person_1.jpg" alt="Image" class="img-fluid">
+                                        <img src="../Public/Landing/images/pexels-yogendra-singh-4511649.jpg" alt="Image" class="img-fluid">
                                     </div>
                                     <div class="author">
-                                        <cite class="d-block mb-0">Kaila Woodland</cite>
+                                        <cite class="d-block mb-0">Jane Smith</cite>
                                         <span>Owner, Greenland, Inc.</span>
                                     </div>
                                 </div>
                                 <blockquote>
-                                    <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
-                                </blockquote>
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="photo mr-3">
-                                        <img src="images/person_2.jpg" alt="Image" class="img-fluid">
-                                    </div>
-                                    <div class="author">
-                                        <cite class="d-block mb-0">Kaila Woodland</cite>
-                                        <span>Owner, Greenland, Inc.</span>
-                                    </div>
-                                </div>
-                                <blockquote>
-                                    <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live.&rdquo;</p>
+                                    <p>&ldquo;As a house owner, I found House Hunt to be a game-changer.&rdquo;</p>
                                 </blockquote>
                             </div>
                         </div>
