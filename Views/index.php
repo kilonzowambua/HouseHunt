@@ -136,7 +136,7 @@
                     <strong class="subtitle d-block">Join Now</strong>
                     <h2 class="mb-4 font-weight-bold heading">Join More Than <strong>90,000+</strong> Amazing People Loves Our Product</h2>
                     <p class="mb-4">House Hunt offers various marketing tools and features to showcase the listed property effectively. This includes high-quality photos, detailed descriptions, virtual tours, and interactive features, enabling house owners to present their property in the best possible light and attract more attention. </p>
-                    <p><a href="#" class="btn btn-primary">Join</a></p>
+                    <p><a href="sign_up?page=sign up" class="btn btn-primary">Join</a></p>
                 </div>
                 <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
                     <div class="testimonial--wrap">
