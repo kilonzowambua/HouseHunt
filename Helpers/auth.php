@@ -8,7 +8,7 @@ if(isset($_POST['sign_up'])){
     $user_id=mysqli_real_escape_string($mysqli,$user_id);
     $user_name=mysqli_real_escape_string($mysqli,$_POST['user_name']);
     $user_email=mysqli_real_escape_string($mysqli,$_POST['user_email']);
-    $user_password=mysqli_real_escape_string($mysqli,password_hash($_POST['user_email'],PASSWORD_DEFAULT));
+    $user_password=mysqli_real_escape_string($mysqli,password_hash($_POST['user_password'],PASSWORD_DEFAULT));
     $user_password_confirmation=mysqli_real_escape_string($mysqli,password_hash($_POST['user_password_confirmation'],PASSWORD_DEFAULT));
 
     if($user_password==$user_password_confirmation){
