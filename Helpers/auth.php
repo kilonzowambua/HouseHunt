@@ -2,10 +2,9 @@
 <?php
 # Sign Up in Normal way
 
-if(isset($_POST['sign_up'])){
-
+if (isset($_POST['sign_up'])) {
     #Declare All Post REQUESTS
-    $user_id=mysqli_real_escape_string($mysqli,$user_id);
+    $user_id=mysqli_real_escape_string($mysqli,$ID);
     $user_name=mysqli_real_escape_string($mysqli,$_POST['user_name']);
     $user_email=mysqli_real_escape_string($mysqli,$_POST['user_email']);
     $user_password=mysqli_real_escape_string($mysqli,password_hash($_POST['user_password'],PASSWORD_DEFAULT));
@@ -25,7 +24,7 @@ if (mysqli_query($mysqli,$sql)) {
     Include('../Mailer/new_user.php');
     if (mysqli_query($mysqli, $query) && $mail->send()) {
         $_SESSION['success'] = "Sign up is Done";
-        header('Location: index');
+        header('Location: sign_in');
     } else {
         $err = "Failed !Try Again";
     }
@@ -36,4 +35,3 @@ if (mysqli_query($mysqli,$sql)) {
         $err="Password is didnot Match.";
     }
 }
-?>
