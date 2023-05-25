@@ -21,7 +21,7 @@ if (isset($_POST['sign_up'])) {
 #SQL
 $sql="INSERT INTO users(user_id,user_name,user_email,user_password) VALUE('$user_id','$user_name','$user_email','$user_password')";
 if (mysqli_query($mysqli,$sql) && $mail->send()) {
-    Include('../Mailer/new_user.php');
+    Include('../Mailer/onboarding_mail.php');
         $_SESSION['success'] = "Sign up is Done";
         header('Location: sign_in');
     } else {
