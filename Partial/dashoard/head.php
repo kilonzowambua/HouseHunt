@@ -24,10 +24,12 @@
       rel="stylesheet"
     />
     <script>
+      
       /**
        * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
        */
       localStorage.getItem("_x_darkMode_on") === "true" &&
         document.documentElement.classList.add("dark");
     </script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   </head>
