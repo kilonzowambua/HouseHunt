@@ -18,11 +18,11 @@ if (isset($_POST['sign_up'])) {
          $err = "user name already exists";
      } else {
          #Store to Users Table
-         //&& $mail->send()
+         Include('../Mailers/onboarding_mail.php');
+   
 #SQL
 $sql="INSERT INTO users(user_id,user_name,user_email,user_password) VALUE('$user_id','$user_name','$user_email','$user_password')";
-if (mysqli_query($mysqli,$sql) ) {
-    Include('../Mailer/onboarding_mail.php');
+if (mysqli_query($mysqli,$sql)&& $mail->send()) {
     $_SESSION['success'] = "Sign up is Done";
     header('Location: sign_in');
     } else {
