@@ -23,12 +23,8 @@ if (isset($_POST['sign_up'])) {
 $sql="INSERT INTO users(user_id,user_name,user_email,user_password) VALUE('$user_id','$user_name','$user_email','$user_password')";
 if (mysqli_query($mysqli,$sql) ) {
     Include('../Mailer/onboarding_mail.php');
-       // Assuming the sign-up is successful
-    $successMessage = "Sign up successful!";
-    $successHtmlContent = '<h3>Success!</h3><p>Your sign-up was successful.</p>';
-    $successTargetElement = ".success-alert";
-    echo '<script>showToast("success", "' . $successMessage . '", `' . $successHtmlContent . '`, "' . $successTargetElement . '");</script>';
-        //header('Location: sign_in');
+    $_SESSION['success'] = "Sign up is Done";
+    header('Location: sign_in');
     } else {
         $err = "Failed !Try Again";
     }

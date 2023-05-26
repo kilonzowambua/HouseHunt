@@ -32,5 +32,11 @@
         document.documentElement.classList.add("dark");
     </script>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-     
+     <?php
+    /* Alert Sesion Via Alerts */
+    if (isset($_SESSION['success'])) {
+        $success = $_SESSION['success'];
+        unset($_SESSION['success']);
+    }
+    ?>
   </head>
