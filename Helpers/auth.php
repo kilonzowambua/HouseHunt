@@ -36,3 +36,29 @@ if (mysqli_query($mysqli,$sql)&& $mail->send()) {
     }
 
 
+#Login Normal Way
+
+if(isset($_POST['sign_in'])){
+
+    #Declare same variables
+
+    $user_email= mysqli_real_escape_string($mysqli,$_POST['user_email']);
+    $user_password= mysqli_real_escape_string($mysqli,$_POST['user_password']);
+
+    #Check user type
+$sql="SELECT * FROM users WHERE user_email='$user_email'";
+if (mysqli_num_rows(mysqli_query($mysqli, $sql)) > 0) {
+    while ($user = mysqli_fetch_array(mysqli_query($mysqli, $sql))) {
+       
+if ($user['user_type'] = '') {
+        #if user Type is not Defined
+$_SESSION['success'] = "Set Up Account";
+    header('Location: onboarding_user');
+} else {
+
+    $_SESSION['success'] = "Login Successively";
+    header('Location: dashboard');
+}
+
+
+}}}
