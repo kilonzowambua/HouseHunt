@@ -7,7 +7,7 @@ include('../Helpers/auth.php');
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<?php  $page='sign up'; ?>
+<?php  $page=$_GET['page']; ?>
 <?php include('../Partial/dashoard/head.php'); ?>
 
 <body x-data class="is-header-blur" x-bind="$store.global.documentBody">
@@ -41,7 +41,7 @@ include('../Helpers/auth.php');
               Welcome To House Hunt
             </h2>
             <p class="text-slate-400 dark:text-navy-300">
-              Please sign up to continue
+              Please sign In to continue
             </p>
           </div>
         </div>
@@ -60,20 +60,13 @@ include('../Helpers/auth.php');
  
         <div class="my-7 flex items-center space-x-3">
           <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
-          <p class="text-tiny+ uppercase">or sign up with email</p>
+          <p class="text-tiny+ uppercase">or sign in with email</p>
 
           <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
         </div>
         <form method="post">
         <div class="mt-4 space-y-4">
-          <label class="relative flex">
-            <input type="text" name="user_name" class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" />
-            <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </span>
-          </label>
+        
           <label class="relative flex">
             <input type="email" name="user_email" class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"/>
             <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
@@ -90,17 +83,10 @@ include('../Helpers/auth.php');
               </svg>
             </span>
           </label>
-          <label class="relative flex">
-            <input type="password" name="confirm_password"   class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"/>
-            <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </span>
-          </label>
+         
          
         </div>
-        <input type="submit" name="sign_up" value="Sign Up" class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+        <input type="submit" name="sign_in" value="Sign In" class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
         </form>
         <div class="mt-4 text-center text-xs+">
           <p class="line-clamp-1">
