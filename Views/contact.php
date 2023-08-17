@@ -23,7 +23,7 @@
                     <li class="active"><a href="contact?page=Contact Us">Contact Us</a></li>
                 </ul>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right menu-absolute">
-                    <li class="cta-button"><a href="" target="_blank">Login</a></li>
+                    <li class="cta-button"><a href="sign_in?page=Login" target="_blank">Login</a></li>
                 </ul>
                 <a href="#" class="burger light ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
                     <span></span>
