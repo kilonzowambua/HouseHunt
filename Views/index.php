@@ -23,7 +23,7 @@
                     <li><a href="contact?page=Contact Us">Contact Us</a></li>
                 </ul>
                 <ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right menu-absolute">
-                    <li class="cta-button"><a href="" target="_blank">Login</a></li>
+                    <li class="cta-button"><a href="sign_in?page=Login" target="_blank">Login</a></li>
                 </ul>
                 <a href="#" class="burger light ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
                     <span></span>
@@ -36,7 +36,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-5 intro">
                     <h1 class="text-white font-weight-bold mb-4" data-aos="fade-up" data-aos-delay="0">Detective-Inspired House Hunt!</h1>
-                    <div id="typewriter"></div>
+                    <p class="text-white mb-4" id="headline" data-aos="fade-up" data-aos-delay="100">Search, Giggle, and Book Your Dream House with House Hunt.Start Your Giggle-Filled House Hunt Now!</p>
                     <a href="" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200"> Get Started</a>
                 </div>
 
@@ -258,9 +258,9 @@
     <?php include('../Partial/landing/script.php'); ?>
     <script type="text/javascript">
         const instance = new Typewriter('#typewriter', {
-            strings: ['<p class="text-white mb-4" id="headline" data-aos="fade-up" data-aos-delay="100">Search, Giggle, and Book Your Dream House with House Hunt.Start Your Giggle-Filled House Hunt Now!</p>'],
+            strings: [''],
             autoStart: true,
-            loop: true,
+            
         });
     </script>
 </body>
