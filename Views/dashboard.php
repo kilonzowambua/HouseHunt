@@ -4,6 +4,7 @@ session_start();
 include('../Config/codeGen.php');
 include('../Config/config.php');
 include('../Helpers/auth.php');
+include('../Helpers/analysis.php');
 $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
 
 ?>
@@ -14,24 +15,19 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
 <?php $page="Dashboard"; ?>
 <?php include('../Partial/dashoard/head.php'); 
 
-#Get Current Loged in  User
 
-$query = "CALL GetUserByID($userID)";
-$result = mysqli_query($mysqli, $query);
-
-if ($result) {
-    // Fetch the user data
-    $user = mysqli_fetch_object($result);
-    if ($user) {
-      
-      $user_name=$user->user_name;
-      $user_type=$user->user_type;
-      
-      #Make Global variable
-      Global $user_name;
-      Global $user_type;
-
-}}
+#Multiple Queries
+$query = "CALL GetUserByID($userID); ";
+$results=mysqli_query($mysqli,$query);
+  if ($user=mysqli_fetch_object($results)) {
+    $user_name=$user->user_name;
+    $user_type=$user->user_type;
+    
+    #Make Global variable
+    Global $user_name;
+    Global $user_type;
+  }
+    
 ?>
 
 <body x-data class="is-header-blur" x-bind="$store.global.documentBody">
@@ -324,147 +320,102 @@ if ($result) {
             </div>
             <div class="mt-2 flex-1 pt-2 text-center text-white sm:mt-0 sm:text-left">
               <h3 class="text-xl">
-                Welcome Back, <span class="font-semibold">Caleb</span>
+                Welcome Back, <span class="font-semibold"><?php echo$user_name ?></span>
               </h3>
               <p class="mt-2 leading-relaxed">
-                Your student completed
-                <span class="font-semibold text-navy-700">85%</span> of tasks
+                Your have logged as 
+                <span class="font-semibold text-navy-700"><?php echo $user_type ?></span> 
               </p>
-              <p>Progress is <span class="font-semibold">excellent!</span></p>
+            
 
               <button class="btn mt-6 bg-slate-50 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80">
-                View Lessons
+                View  Bookings
               </button>
             </div>
           </div>
 
-          <div class="mt-4 sm:mt-5 lg:mt-6">
-            <div class="flex h-8 items-center justify-between">
-              <h2 class="text-base font-medium tracking-wide text-slate-700 dark:text-navy-100">
-                Week 2 Classes
+        
+          <div class="flex items-center justify-between py-3 px-4">
+              <h2 class="font-medium tracking-wide text-slate-700 dark:text-navy-100">
+              Overall Analytics
               </h2>
-              <a href="#" class="border-b border-dotted border-current pb-0.5 text-xs+ font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">View All</a>
+             
             </div>
-            <div class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
-              <div class="card flex-row overflow-hidden">
-                <div class="h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600"></div>
-                <div class="flex flex-1 flex-col justify-between p-4 sm:px-5">
-                  <div>
-                    <img class="h-12 w-12 rounded-lg object-cover object-center" src="images/others/testing-sm.jpg" alt="image" />
-                    <h3 class="mt-3 font-medium text-slate-700 line-clamp-2 dark:text-navy-100">
-                      Basic English
-                    </h3>
-                    <p class="text-xs+">Mon. 08:00 - 09:00</p>
-                    <div class="mt-2 flex space-x-1.5">
-                      <a href="#" class="tag bg-primary py-1 px-1.5 text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                        Language
-                      </a>
-                    </div>
-                  </div>
-                  <div class="mt-10 flex justify-between">
-                    <div class="flex -space-x-2">
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-16.jpg" alt="avatar" />
-                      </div>
 
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <div class="is-initial rounded-full bg-info text-xs+ uppercase text-white ring ring-white dark:ring-navy-700">
-                          jd
-                        </div>
-                      </div>
-
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-19.jpg" alt="avatar" />
-                      </div>
-                    </div>
-                    <button class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 hover:shadow-lg hover:shadow-slate-200/50 focus:bg-slate-200 focus:shadow-lg focus:shadow-slate-200/50 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:hover:shadow-navy-450/50 dark:focus:bg-navy-450 dark:focus:shadow-navy-450/50 dark:active:bg-navy-450/90">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-                      </svg>
-                    </button>
+            <div class="grid grid-cols-1 gap-y-4 pb-2 sm:grid-cols-3">
+              
+              <div class="flex flex-col justify-between border-4 border-transparent border-l-info px-4">
+                <div>
+                  <p class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    Users
+                  </p>
+                  
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    House Owners:<?php echo $user_owners->total ?>
+                  </h2>
+                  
+                
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    House Seeks: <?php echo $user_seekers->total ?>
+                  </h2>
+                </div>
+                <div>
+                  <div class="mt-2">
+                    <p class="font-inter">
+                      <span class="text-2xl font-medium text-slate-600 dark:text-navy-100">Total : <?php  echo $total= $user_owners->total + $user_seekers->total ?></span>
+                    </p>
+                  
                   </div>
+                 
                 </div>
               </div>
-              <div class="card flex-row overflow-hidden">
-                <div class="h-full w-1 bg-gradient-to-b from-info to-info-focus"></div>
-                <div class="flex flex-1 flex-col justify-between p-4 sm:px-5">
-                  <div>
-                    <img class="h-12 w-12 rounded-lg object-cover object-center" src="images/others/design-sm.jpg" alt="image" />
-                    <h3 class="mt-3 font-medium text-slate-700 line-clamp-2 dark:text-navy-100">
-                      Learn UI/UX Design
-                    </h3>
-                    <p class="text-xs+">Tue. 10:00 - 11:30</p>
-                    <div class="mt-2 flex space-x-1.5">
-                      <a href="#" class="tag bg-info py-1 px-1.5 text-white hover:bg-info-focus focus:bg-info-focus active:bg-info-focus/90">
-                        UI/UX Design
-                      </a>
-                    </div>
+       
+              <div class="flex flex-col justify-between border-4 border-transparent border-l-secondary px-4">
+                <div>
+                  <p class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    Houses
+                  </p>
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    House Vacanty:
+                  </h2>
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    House Occupied:
+                  </h2>
+                </div>
+                <div>
+                  <div class="mt-2">
+                    <p class="font-inter">
+                      <span class="text-2xl font-medium text-slate-600 dark:text-navy-100">Total:</span><span class="text-xs"></span>
+                    </p>
+                  
                   </div>
-                  <div class="mt-10 flex justify-between">
-                    <div class="flex -space-x-2">
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-20.jpg" alt="avatar" />
-                      </div>
-
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <div class="is-initial rounded-full bg-warning text-xs+ uppercase text-white ring ring-white dark:ring-navy-700">
-                          iu
-                        </div>
-                      </div>
-
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-17.jpg" alt="avatar" />
-                      </div>
-                    </div>
-                    <button class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 hover:shadow-lg hover:shadow-slate-200/50 focus:bg-slate-200 focus:shadow-lg focus:shadow-slate-200/50 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:hover:shadow-navy-450/50 dark:focus:bg-navy-450 dark:focus:shadow-navy-450/50 dark:active:bg-navy-450/90">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-                      </svg>
-                    </button>
-                  </div>
+                 
                 </div>
               </div>
-              <div class="card flex-row overflow-hidden">
-                <div class="h-full w-1 bg-gradient-to-b from-secondary-light to-secondary"></div>
-                <div class="flex flex-1 flex-col justify-between p-4 sm:px-5">
-                  <div>
-                    <img class="h-12 w-12 rounded-lg object-cover object-center" src="images/others/sales-presentation-sm.jpg" alt="image" />
-                    <h3 class="mt-3 font-medium text-slate-700 line-clamp-2 dark:text-navy-100">
-                      Basic of digital marketing
-                    </h3>
-                    <p class="text-xs+">Wed. 09:00 - 11:00</p>
-                    <div class="mt-2 flex space-x-1.5">
-                      <a href="#" class="tag bg-secondary px-1.5 py-1 text-white hover:bg-secondary-focus focus:bg-secondary-focus active:bg-secondary-focus/90">
-                        Marketing
-                      </a>
-                    </div>
+              <div class="flex flex-col justify-between border-4 border-transparent border-l-warning px-4">
+                <div>
+                  <p class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    Bookings
+                  </p>
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    Pending :
+                  </h2>
+                  <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
+                    Completed:
+                  </h2>
+                </div>
+                <div>
+                  <div class="mt-2">
+                    <p class="font-inter">
+                      <span class="text-2xl font-medium text-slate-600 dark:text-navy-100">Total:</span><span class="text-xs"></span>
+                    </p>
+                  
                   </div>
-                  <div class="mt-10 flex justify-between">
-                    <div class="flex -space-x-2">
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-16.jpg" alt="avatar" />
-                      </div>
-
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <div class="is-initial rounded-full bg-info text-xs+ uppercase text-white ring ring-white dark:ring-navy-700">
-                          jd
-                        </div>
-                      </div>
-
-                      <div class="avatar h-7 w-7 hover:z-10">
-                        <img class="rounded-full ring ring-white dark:ring-navy-700" src="images/avatar/avatar-19.jpg" alt="avatar" />
-                      </div>
-                    </div>
-                    <button class="btn h-7 w-7 rounded-full bg-slate-150 p-0 font-medium text-slate-800 hover:bg-slate-200 hover:shadow-lg hover:shadow-slate-200/50 focus:bg-slate-200 focus:shadow-lg focus:shadow-slate-200/50 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:hover:shadow-navy-450/50 dark:focus:bg-navy-450 dark:focus:shadow-navy-450/50 dark:active:bg-navy-450/90">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-                      </svg>
-                    </button>
-                  </div>
+                 
                 </div>
               </div>
             </div>
-          </div>
+          
 
           <div class="mt-4 sm:mt-5 lg:mt-6">
             <div class="flex items-center justify-between">
