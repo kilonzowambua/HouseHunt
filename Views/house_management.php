@@ -6,15 +6,15 @@ include('../Config/config.php');
 include('../Helpers/auth.php');
 include('../Helpers/houses_management.php');
 
-$userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
+$userID = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<?php $page="Dashboard"; ?>
-<?php include('../Partial/dashoard/head.php'); 
+<?php $page = "Dashboard"; ?>
+<?php include('../Partial/dashoard/head.php');
 
 ?>
 
@@ -27,12 +27,12 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
   <!-- Page Wrapper -->
   <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak>
     <!-- Sidebar -->
-   <?php include('../Partial/dashoard/sidebar.php'); ?>
+    <?php include('../Partial/dashoard/sidebar.php'); ?>
 
     <!-- App Header Wrapper-->
     <?php include('../Partial/dashoard/header.php'); ?>
-<!-- Main Content Wrapper -->
-<main class="main-content w-full px-[var(--margin-x)] pb-8">
+    <!-- Main Content Wrapper -->
+    <main class="main-content w-full px-[var(--margin-x)] pb-8">
       <div class="flex items-center space-x-4 py-5 lg:py-6">
         <h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
           House Management
@@ -58,7 +58,7 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
             <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
               <div x-data="{showModal:false}">
                 <button @click="showModal = true" class="btn bg-gradient-to-r from-sky-400 to-blue-600 p-0.5 font-medium">
-                <span class="btn bg-white dark:bg-navy-700"> Add New House</span>
+                  <span class="btn bg-white dark:bg-navy-700"> Add New House</span>
                 </button>
                 <template x-teleport="#x-teleport-target">
                   <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
@@ -66,7 +66,7 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
                     <div class="relative w-full max-w-lg origin-top rounded-lg bg-white transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
                       <div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
                         <h3 class="text-base font-medium text-slate-700 dark:text-navy-100">
-                         New houses
+                          New houses
                         </h3>
                         <button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -75,75 +75,75 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
                         </button>
                       </div>
                       <div class="px-1 py-0.2 sm:px-2">
-                       
-                      <form method="post" enctype="multipart/form-data">
-                                        <div class="mt-1 space-y-2">
-                                          <label class="block">
-                                            <span>House No:</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no"  type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>House Title:</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title"  type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>House Description:</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description"  type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>Choose House type :</span>
-                                            <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                            
-                                              <option>Bed sitter</option>
-                                              <option>2-Bed room</option>
-                                              <option>Self Contained</option>
-                                            </select>
-                                          </label>
-                                          <label class="block">
-                                            <span>House Image :</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_image"  type="file" />
-                                          </label>
-                                          <label class="block">
-                                            <span>House location :</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location"  type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>House Price(Ksh):</span>
-                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price"  type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>Choose House Owner :</span>
-                                            <select name="house_user_id" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                            <?php
-                            // Call the stored procedure without parameter binding
-$sql = "CALL GetHouseOwners('0')";
-// Execute the stored procedure
-$result = $mysqli2->query($sql);
-while ($house_owner = $result->fetch_object()) {
-                            ?>
-                                              <option value="<?php echo $house_owner->user_id ?>"><?php echo $house_owner->user_name ?> </option>
-                                              <?php }
-                                              $mysqli2->close();
-                                               ?>
-                                              
-                                            </select>
-                                          </label>
-                                          <div class="space-x-2 text-right">
-                                            <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                                              Cancel
-                                            </button>
-                                            <button type="submit" name="add_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                              Submit
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </form>
+
+                        <form method="post" enctype="multipart/form-data">
+                          <div class="mt-1 space-y-2">
+                            <label class="block">
+                              <span>House No:</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no" type="text" />
+                            </label>
+                            <label class="block">
+                              <span>House Title:</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title" type="text" />
+                            </label>
+                            <label class="block">
+                              <span>House Description:</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description" type="text" />
+                            </label>
+                            <label class="block">
+                              <span>Choose House type :</span>
+                              <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+
+                                <option>Bed sitter</option>
+                                <option>2-Bed room</option>
+                                <option>Self Contained</option>
+                              </select>
+                            </label>
+                            <label class="block">
+                              <span>House Image :</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_image" type="file" />
+                            </label>
+                            <label class="block">
+                              <span>House location :</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location" type="text" />
+                            </label>
+                            <label class="block">
+                              <span>House Price(Ksh):</span>
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" type="text" />
+                            </label>
+                            <label class="block">
+                              <span>Choose House Owner :</span>
+                              <select name="house_user_id" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+                                <?php
+                                // Call the stored procedure without parameter binding
+                                $sql = "CALL GetHouseOwners('0')";
+                                // Execute the stored procedure
+                                $result = $mysqli4->query($sql);
+                                while ($house_owner = $result->fetch_object()) {
+                                ?>
+                                  <option value="<?php echo $house_owner->user_id ?>"><?php echo $house_owner->user_name ?> </option>
+                                <?php }
+                                $mysqli2->close();
+                                ?>
+
+                              </select>
+                            </label>
+                            <div class="space-x-2 text-right">
+                              <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                                Cancel
+                              </button>
+                              <button type="submit" name="add_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </template>
               </div>
-              
+
 
               <div x-ref="popperRoot" class="popper-root" :class="isShowPopper && 'show'">
                 <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
@@ -182,19 +182,19 @@ while ($house_owner = $result->fetch_object()) {
                         House Title
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                      House Description
+                        House Description
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                      House Type
+                        House Type
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                      House Location
+                        House Location
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                      House Price(Ksh)
+                        House Price(Ksh)
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                      House Status
+                        House Status
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                         Action
@@ -234,11 +234,11 @@ while ($house_owner = $result->fetch_object()) {
                           <?php echo $house->house_location;  ?>
                         </td>
                         <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                         Ksh. <?php echo $house->house_price;  ?>
+                          Ksh. <?php echo $house->house_price;  ?>
                         </td>
                         <td class="whitespace-nowrap px-4 py-3 sm:px-5">
                           <?php
-                          if ($house->house_status == 'Available') {  ?>
+                          if ($house->house_status = 'Available') {  ?>
 
                             <div class="badge rounded-full bg-secondary text-white"><?php echo $house->house_status;  ?></div>
 
@@ -248,13 +248,13 @@ while ($house_owner = $result->fetch_object()) {
 
                           <?php }  ?>
 
-                          
+
                         </td>
                         <td class="whitespace-nowrap">
                           <div>
                             <div x-data="{showModal:false}">
                               <button @click="showModal = true " class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                <i class="fa fa-edit"></i>
+                               <i class="fa fa-edit"></i>
                               </button>
                               <template x-teleport="#x-teleport-target">
                                 <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
@@ -262,7 +262,7 @@ while ($house_owner = $result->fetch_object()) {
                                   <div class="relative w-full max-w-lg origin-top rounded-lg bg-white transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
                                     <div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
                                       <h3 class="text-base font-medium text-slate-700 dark:text-navy-100">
-                                        Edit - <?php echo $user->user_name;  ?>
+                                        Edit - <?php echo $house->house_no;  ?> : <?php echo $house->house_title;  ?>
                                       </h3>
                                       <button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -270,71 +270,77 @@ while ($house_owner = $result->fetch_object()) {
                                         </svg>
                                       </button>
                                     </div>
-                                    <div class="px-4 py-4 sm:px-5">
-                                      <form method="post">
-                                        <div class="mt-4 space-y-4">
-                                          <label class="block">
-                                            <span>User Name:</span>
-                                            <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="user_id" value="<?php echo $user->user_id;  ?>" type="text" hidden />
-                                            <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="user_name" value="<?php echo $user->user_name;  ?>" type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>User Email:</span>
-                                            <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="user_email" value="<?php echo $user->user_email;  ?>" type="email" />
-                                          </label>
-                                          <label class="block">
-                                            <span>User Phone:</span>
-                                            <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="user_phone_no" value="<?php echo $user->user_phone_no;  ?>" type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>User location:</span>
-                                            <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="user_location" value="<?php echo $user->user_location;  ?>" type="text" />
-                                          </label>
-                                          <label class="block">
-                                            <span>Choose type :</span>
-                                            <select name="user_type" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-                                              <option selected><?php echo $user->user_type ?></option>
-                                              <option>House Owner</option>
-                                              <option>House Seeker</option>
-                                              <option>Administrator</option>
-                                            </select>
-                                          </label>
+                                    <div class="px-1 py-0.2 sm:px-2">
 
-                                          <div class="space-x-2 text-right">
-                                            <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                                              Cancel
-                                            </button>
-                                            <button type="submit" name="edit_user" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                              Apply
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </form>
-                                    </div>
+<form method="post" enctype="multipart/form-data">
+  <div class="mt-1 space-y-2">
+    <label class="block">
+      <span>House No:</span>
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_id" value="<?php echo $house->house_id;  ?>" type="text" hidden />
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no" value="<?php echo $house->house_no;  ?>" type="text" />
+    </label>
+    <label class="block">
+      <span>House Title:</span>
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title" value="<?php echo $house->house_title;  ?>" type="text" />
+    </label>
+    <label class="block">
+      <span>House Description:</span>
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description" value="<?php echo $house->house_description;  ?>" type="text" />
+    </label>
+    <label class="block">
+      <span>Choose House type :</span>
+      <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+
+        <option>Bed sitter</option>
+        <option>2-Bed room</option>
+        <option>Self Contained</option>
+      </select>
+    </label>
+   
+    <label class="block">
+      <span>House location :</span>
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location" value="<?php echo $house->house_location;  ?>" type="text" />
+    </label>
+    <label class="block">
+      <span>House Price(Ksh):</span>
+      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" value="<?php echo $house->house_price;  ?>" type="text" />
+    </label>
+    
+    <div class="space-x-2 text-right">
+      <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+        Cancel
+      </button>
+      <button type="submit" name="edit_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+</div>
                                   </div>
                                 </div>
                               </template>
                             </div>
                             <div x-data="{showModal:false}">
                               <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                <i class="fa fa-trash-alt"></i>
+                                <i class="fa fa-trash"></i>
                               </button>
                               <template x-teleport="#x-teleport-target">
                                 <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
                                   <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
                                   <div class="relative max-w-lg rounded-lg bg-white px-4 py-10 text-center transition-opacity duration-300 dark:bg-navy-700 sm:px-5" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-                                    <img class="w-full" height="5"  src="../Public/Dashboard/images/illustrations/cancel-animate.svg" alt="image" />
+                                    <img class="w-full" height="2" src="../Public/Dashboard/images/illustrations/questions-animate.svg" alt="image" />
 
                                     <div class="mt-4">
                                       <h2 class="text-2xl text-slate-700 dark:text-navy-100">
-                                        Delete this User Account
+                                        Delete this House
                                       </h2>
                                       <p style="color:red;" class="mt-2 text-color:Red;">
-                                        .Warning,Once account is Deleted Can not be recovered,Are you Sure?
+                                        .Warning,Once house is Deleted, Can not be recovered,Are you Sure?
                                       </p>
                                       <form method="post">
-                                        <input type="hidden" value="<?php echo $user->user_id;  ?>" name="user_id">
-                                        <button type="submit" name="delete_user" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
+                                        <input type="hidden" value="<?php echo $house->house_id;  ?>" name="house_id">
+                                        <button type="submit" name="delete_house" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
                                           Yes
                                         </button>
                                         <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
@@ -370,9 +376,9 @@ while ($house_owner = $result->fetch_object()) {
       </div>
     </main>
 
-  
 
-   
+
+
   </div>
 
   <div id="x-teleport-target"></div>
