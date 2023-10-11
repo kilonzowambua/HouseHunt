@@ -254,7 +254,7 @@ $userID = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                           <div>
                             <div x-data="{showModal:false}">
                               <button @click="showModal = true " class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                               <i class="fa fa-edit"></i>
+                                <i class="fa fa-edit"></i>
                               </button>
                               <template x-teleport="#x-teleport-target">
                                 <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
@@ -272,51 +272,51 @@ $userID = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                                     </div>
                                     <div class="px-1 py-0.2 sm:px-2">
 
-<form method="post" enctype="multipart/form-data">
-  <div class="mt-1 space-y-2">
-    <label class="block">
-      <span>House No:</span>
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_id" value="<?php echo $house->house_id;  ?>" type="text" hidden />
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no" value="<?php echo $house->house_no;  ?>" type="text" />
-    </label>
-    <label class="block">
-      <span>House Title:</span>
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title" value="<?php echo $house->house_title;  ?>" type="text" />
-    </label>
-    <label class="block">
-      <span>House Description:</span>
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description" value="<?php echo $house->house_description;  ?>" type="text" />
-    </label>
-    <label class="block">
-      <span>Choose House type :</span>
-      <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
+                                      <form method="post" enctype="multipart/form-data">
+                                        <div class="mt-1 space-y-2">
+                                          <label class="block">
+                                            <span>House No:</span>
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_id" value="<?php echo $house->house_id;  ?>" type="text" hidden />
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no" value="<?php echo $house->house_no;  ?>" type="text" />
+                                          </label>
+                                          <label class="block">
+                                            <span>House Title:</span>
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title" value="<?php echo $house->house_title;  ?>" type="text" />
+                                          </label>
+                                          <label class="block">
+                                            <span>House Description:</span>
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description" value="<?php echo $house->house_description;  ?>" type="text" />
+                                          </label>
+                                          <label class="block">
+                                            <span>Choose House type :</span>
+                                            <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
 
-        <option>Bed sitter</option>
-        <option>2-Bed room</option>
-        <option>Self Contained</option>
-      </select>
-    </label>
-   
-    <label class="block">
-      <span>House location :</span>
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location" value="<?php echo $house->house_location;  ?>" type="text" />
-    </label>
-    <label class="block">
-      <span>House Price(Ksh):</span>
-      <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" value="<?php echo $house->house_price;  ?>" type="text" />
-    </label>
-    
-    <div class="space-x-2 text-right">
-      <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-        Cancel
-      </button>
-      <button type="submit" name="edit_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-        Submit
-      </button>
-    </div>
-  </div>
-</form>
-</div>
+                                              <option>Bed sitter</option>
+                                              <option>2-Bed room</option>
+                                              <option>Self Contained</option>
+                                            </select>
+                                          </label>
+
+                                          <label class="block">
+                                            <span>House location :</span>
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location" value="<?php echo $house->house_location;  ?>" type="text" />
+                                          </label>
+                                          <label class="block">
+                                            <span>House Price(Ksh):</span>
+                                            <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" value="<?php echo $house->house_price;  ?>" type="text" />
+                                          </label>
+
+                                          <div class="space-x-2 text-right">
+                                            <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                                              Cancel
+                                            </button>
+                                            <button type="submit" name="edit_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                                              Submit
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
                                   </div>
                                 </div>
                               </template>
