@@ -80,9 +80,13 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                               <span>Choose House Owner :</span>
                               <select name="house_no" id="house_no" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
                                 <?php
-                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-                     ";
-                                $result = mysqli_query($mysqli2, $sql);
+                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";        
+                                $result = mysqli_query($mysqli, $sql);
+                              // Check if there are multiple result sets
+                             if (mysqli_more_results($mysqli)) {
+                           // Move to the next result set
+                             mysqli_next_result($mysqli);
+                            }
 
                                 while ($house = $result->fetch_object()) {
                                   if ($house->house_status = 'Available') {
@@ -90,8 +94,8 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                                     <option value="<?php echo $house->house_no ?>"><?php echo $house->house_no ?> </option>
                                 <?php }
                                 }
-                                $result->close();
-                                $mysqli2->close();
+                                $result->free();
+                                
                                 ?>
 
                               </select>
@@ -179,16 +183,16 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                         House Title
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                        House Description
+                        House Owner
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                        House Type
+                        House Seeker
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                        House Location
+                        Booked on
                       </th>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
-                        House Price(Ksh)
+                        Booking Status
                       </th>
 
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
@@ -198,16 +202,15 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-                    ";
-                    $result = mysqli_query($mysqli3, $sql);
+                    $sql = "CALL ManageBooking('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+                    $result = mysqli_query($mysqli, $sql);
                     // Fetch all rows and store them as objects
                     #Count
                     $count = 0;
-                    while ($house = $result->fetch_object()) {
+                    while ($bookings = $result->fetch_object()) {
                       $count = $count + 1;
-
-                      if ($house->house_status = 'Available') {  ?>
+?>
+                  
 
 
                         <tr>
@@ -215,34 +218,28 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                             <?php echo $count;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $house->house_no;  ?>
+                            <?php echo $bookings->house_no;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $house->house_title;  ?>
+                            <?php echo $bookings->house_title;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $house->house_description;  ?>
+                            <?php echo $bookings->Owner_name;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $house->house_type;  ?>
+                            <?php echo $bookings->Seeker_name;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $house->house_location;  ?>
+                            <?php echo $bookings->booking_date;  ?>
                           </td>
                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            Ksh. <?php echo $house->house_price;  ?>
-                          </td>
-
-
-
-
-
-                          </td>
-                          <td class="whitespace-nowrap">
+                          <?php echo $bookings->booking_status;  ?>
+                    </td>
+                          <td class="px-4 py-3 sm:px-5">
                             <div>
                               <div x-data="{showModal:false}">
                                 <button @click="showModal = true " class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                  <i class="fa fa-edit"></i>
+                                  <i class="fa fa-check-circle-o fa-lg"  aria-hidden="true" style="color:black"></i>
                                 </button>
                                 <template x-teleport="#x-teleport-target">
                                   <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
@@ -311,7 +308,7 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                               </div>
                               <div x-data="{showModal:false}">
                                 <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                  <i class="fa fa-trash"></i>
+                                  <i class="fa fa-ban fa-lg"  aria-hidden="true" style="color:red"></i>
                                 </button>
                                 <template x-teleport="#x-teleport-target">
                                   <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
@@ -345,7 +342,7 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                           </td>
                         </tr>
                     <?php }
-                    } ?>
+                     ?>
 
 
 
