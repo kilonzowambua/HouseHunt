@@ -80,13 +80,13 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                               <span>Choose House Owner :</span>
                               <select name="house_no" id="house_no" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
                                 <?php
-                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";        
+                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
                                 $result = mysqli_query($mysqli, $sql);
-                              // Check if there are multiple result sets
-                             if (mysqli_more_results($mysqli)) {
-                           // Move to the next result set
-                             mysqli_next_result($mysqli);
-                            }
+                                // Check if there are multiple result sets
+                                if (mysqli_more_results($mysqli)) {
+                                  // Move to the next result set
+                                  mysqli_next_result($mysqli);
+                                }
 
                                 while ($house = $result->fetch_object()) {
                                   if ($house->house_status = 'Available') {
@@ -95,7 +95,7 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                                 <?php }
                                 }
                                 $result->free();
-                                
+
                                 ?>
 
                               </select>
@@ -125,7 +125,7 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                             </label>
                             <label class="block">
                               <span>Booking Date:</span>
-                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="booking_date" type="date"  min="<?php echo date("Y-m-d"); ?>" />
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="booking_date" type="date" min="<?php echo date("Y-m-d"); ?>" />
                             </label>
 
                             <div class="space-x-2 text-right">
@@ -209,140 +209,87 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                     $count = 0;
                     while ($bookings = $result->fetch_object()) {
                       $count = $count + 1;
-?>
-                  
+                    ?>
 
 
-                        <tr>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $count;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $bookings->house_no;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $bookings->house_title;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $bookings->Owner_name;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $bookings->Seeker_name;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                            <?php echo $bookings->booking_date;  ?>
-                          </td>
-                          <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+
+                      <tr>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $count;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $bookings->house_no;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $bookings->house_title;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $bookings->Owner_name;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $bookings->Seeker_name;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                          <?php echo $bookings->booking_date;  ?>
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
                           <?php echo $bookings->booking_status;  ?>
-                    </td>
-                          <td class="px-4 py-3 sm:px-5">
-                            <div>
-                              <div x-data="{showModal:false}">
-                                <button @click="showModal = true " class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                  <i class="fa fa-check-circle-o fa-lg"  aria-hidden="true" style="color:black"></i>
-                                </button>
-                                <template x-teleport="#x-teleport-target">
-                                  <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
-                                    <div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
-                                    <div class="relative w-full max-w-lg origin-top rounded-lg bg-white transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95">
-                                      <div class="flex justify-between rounded-t-lg bg-slate-200 px-4 py-3 dark:bg-navy-800 sm:px-5">
-                                        <h3 class="text-base font-medium text-slate-700 dark:text-navy-100">
-                                          Edit - <?php echo $house->house_no;  ?> : <?php echo $house->house_title;  ?>
-                                        </h3>
-                                        <button @click="showModal = !showModal" class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                          </svg>
+                        </td>
+                        <td class="px-4 py-3 sm:px-5">
+                          <div>
+                            <div x-data="{showModal:false}">
+                              <button @click="showModal = true " class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                                <i class="fa fa-check-circle-o fa-lg" aria-hidden="true" style="color:black"></i>
+                              </button>
+                              <template x-teleport="#x-teleport-target">
+                                <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
+                                  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+                                  <div class="relative max-w-lg rounded-lg bg-white px-4 py-5 text-center transition-opacity duration-300 dark:bg-navy-700 sm:px-5" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                                    <img height="400" width="400" src="../Public/Dashboard/images/illustrations/ok-animate.svg" alt="image" />
+
+                                    <div>
+                                      <h2 class="text-2xl text-slate-700 dark:text-navy-100">
+                                        Approve of Booking
+                                      </h2>
+
+                                      <form method="post">
+                                        <label class="block">
+                                          <span>Change Booking Status:</span>
+                                          <select name="booking_status" id="booking_status" class="form-select w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover-border-navy-400 dark:focus-border-accent">
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Reserved">Reserved</option>
+                                          </select>
+                                        </label>
+
+
+                                        <label class="block">
+                                          <span>Time:</span>
+                                          <input type="time" value="00:00" name="booking_time" id="booking_time" class="form-input w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover-border-navy-400 dark:focus-border-accent" />
+                                        </label>
+
+
+                                        <input type="hidden" value="<?php echo $bookings->booking_id; ?>" name="booking_id">
+                                        <button type="submit" name="edit_booking" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
+                                          Yes
                                         </button>
-                                      </div>
-                                      <div class="px-1 py-0.2 sm:px-2">
+                                        <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
+                                          Close
+                                        </button>
+                                      </form>
 
-                                        <form method="post">
-                                          <div class="mt-1 space-y-2">
-                                            <label class="block">
-                                              <span>House No:</span>
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_id" value="<?php echo $house->house_id;  ?>" type="text" hidden />
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_no" value="<?php echo $house->house_no;  ?>" type="text" />
-                                            </label>
-                                            <label class="block">
-                                              <span>House Title:</span>
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_title" value="<?php echo $house->house_title;  ?>" type="text" />
-                                            </label>
-                                            <label class="block">
-                                              <span>House Description:</span>
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_description" value="<?php echo $house->house_description;  ?>" type="text" />
-                                            </label>
-                                            <label class="block">
-                                              <span>Choose House type :</span>
-                                              <select name="house_type" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
 
-                                                <option>Bed sitter</option>
-                                                <option>2-Bed room</option>
-                                                <option>Self Contained</option>
-                                              </select>
-                                            </label>
 
-                                            <label class="block">
-                                              <span>House location :</span>
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_location" value="<?php echo $house->house_location;  ?>" type="text" />
-                                            </label>
-                                            <label class="block">
-                                              <span>House Price(Ksh):</span>
-                                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" value="<?php echo $house->house_price;  ?>" type="text" />
-                                            </label>
-
-                                            <div class="space-x-2 text-right">
-                                              <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                                                Cancel
-                                              </button>
-                                              <button type="submit" name="edit_house" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                                Submit
-                                              </button>
-                                            </div>
-                                          </div>
-                                        </form>
-                                      </div>
                                     </div>
                                   </div>
-                                </template>
-                              </div>
-                              <div x-data="{showModal:false}">
-                                <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-                                  <i class="fa fa-ban fa-lg"  aria-hidden="true" style="color:red"></i>
-                                </button>
-                                <template x-teleport="#x-teleport-target">
-                                  <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
-                                    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
-                                    <div class="relative max-w-lg rounded-lg bg-white px-4 py-10 text-center transition-opacity duration-300 dark:bg-navy-700 sm:px-5" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-                                      <img class="w-full" height="2" src="../Public/Dashboard/images/illustrations/questions-animate.svg" alt="image" />
-
-                                      <div class="mt-4">
-                                        <h2 class="text-2xl text-slate-700 dark:text-navy-100">
-                                          Delete this House
-                                        </h2>
-                                        <p style="color:red;" class="mt-2 text-color:Red;">
-                                          .Warning,Once house is Deleted, Can not be recovered,Are you Sure?
-                                        </p>
-                                        <form method="post">
-                                          <input type="hidden" value="<?php echo $house->house_id;  ?>" name="house_id">
-                                          <button type="submit" name="delete_house" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
-                                            Yes
-                                          </button>
-                                          <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
-                                            Close
-                                          </button>
-                                        </form>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                                </template>
-                              </div>
+                                </div>
+                              </template>
                             </div>
-                          </td>
-                        </tr>
+                          
+                          </div>
+                        </td>
+                      </tr>
                     <?php }
-                     ?>
+                    ?>
 
 
 
@@ -371,8 +318,31 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
   <script>
     window.addEventListener("DOMContentLoaded", () => Alpine.start());
   </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#booking_status').change(function() {
+        var booking_status = $(this).val();
+
+        // Clear previous content
+        $('#timeInputContainer').empty();
+
+        // Generate content based on selected payment type
+        switch (booking_status) {
+
+          case 'mpesa':
+            $('#paymentOptions').append('<div class="mt-5 col-6"><label class="block">M-pesa Transaction Code:</label><input type="text" name="payment_transaction_code" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary disabled:pointer-events-none disabled:select-none disabled:border-none disabled:bg-zinc-100 dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent dark:disabled:bg-navy-600"  /> </div>');
+            break;
+          default:
+            break;
+        }
+      });
+    });
+  </script>
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  
+
   <script>
     $(document).ready(function() {
       $('#house_no').change(function() {
