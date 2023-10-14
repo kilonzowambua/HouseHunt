@@ -77,7 +77,7 @@ $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                         <form method="post" enctype="multipart/form-data">
                           <div class="mt-1 space-y-2">
                             <label class="block">
-                              <span>Choose House Owner :</span>
+                              <span>Choose House No :</span>
                               <select name="house_no" id="house_no" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
                                 <?php
                                 $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
