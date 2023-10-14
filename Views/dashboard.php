@@ -16,8 +16,7 @@ $userID = mysqli_real_escape_string($mysqli,$_SESSION['user_id']);
 <?php include('../Partial/dashoard/head.php'); 
 
 
-#Multiple Queries
-$query = "CALL GetUserByID($userID); ";
+$query = "CALL GetUserByID('$userID'); ";
 $results=mysqli_query($mysqli,$query);
   if ($user=mysqli_fetch_object($results)) {
     $user_name=$user->user_name;
@@ -26,7 +25,7 @@ $results=mysqli_query($mysqli,$query);
     #Make Global variable
     Global $user_name;
     Global $user_type;
-  }
+  
     
 ?>
 
@@ -135,7 +134,7 @@ $results=mysqli_query($mysqli,$query);
                     Bookings
                   </p>
                   <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
-                    Pending : <?php echo $pending_booking->total ?>
+                    Concelled : <?php echo $cancelled_booking->total ?>
                   </h2>
                   <h2 class="text-base font-medium text-slate-600 dark:text-navy-100">
                     Completed : <?php echo $completed_booking->total ?>
@@ -144,7 +143,7 @@ $results=mysqli_query($mysqli,$query);
                 <div>
                   <div class="mt-2">
                     <p class="font-inter">
-                      <span class="text-2xl font-medium text-slate-600 dark:text-navy-100">Total : <?php echo $total=$pending_booking->total+$completed_booking->total ?></span><span class="text-xs"></span>
+                      <span class="text-2xl font-medium text-slate-600 dark:text-navy-100">Total : <?php echo $total=$cancelled_booking->total+$completed_booking->total ?></span><span class="text-xs"></span>
                     </p>
                   
                   </div>
@@ -191,7 +190,7 @@ $results=mysqli_query($mysqli,$query);
                    
                   </div>
                 </div>
-          <?php } ?>
+          <?php } }?>
             </div>
           </div>
         </div>

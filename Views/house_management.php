@@ -7,8 +7,25 @@ include('../Helpers/auth.php');
 include('../Helpers/houses_management.php');
 
 $userID = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
-
+$query = "CALL GetUserByID('$userID'); ";
+$results=mysqli_query($mysqli,$query);
+  if ($user=mysqli_fetch_object($results)) {
+    $user_name=$user->user_name;
+    $user_type=$user->user_type;
+    
+    #Make Global variable
+    Global $user_name;
+    Global $user_type;
+  // Check if there are multiple result sets
+  if (mysqli_more_results($mysqli)) {
+    // Move to the next result set
+    mysqli_next_result($mysqli);
+  }
+   
+  $results->free();
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -356,7 +373,7 @@ $userID = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                           </div>
                         </td>
                       </tr>
-                    <?php } ?>
+                    <?php }} ?>
 
 
 
