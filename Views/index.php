@@ -256,13 +256,7 @@
     </div>
 
     <?php include('../Partial/landing/script.php'); ?>
-    <script type="text/javascript">
-        const instance = new Typewriter('#typewriter', {
-            strings: [''],
-            autoStart: true,
-            
-        });
-    </script>
+
 </body>
 
 </html>
