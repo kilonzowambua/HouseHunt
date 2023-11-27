@@ -1,6 +1,7 @@
 <?php
 include('../Config/codeGen.php');
 include('../Config/config.php');
+include('../Config/google_auth.php');
 include('../Helpers/auth.php');
 
 ?>
@@ -48,15 +49,11 @@ include('../Helpers/auth.php');
 
         <div class="mt-10 flex space-x-4">
           <button class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-            <img class="h-5.5 w-5.5" src="../Public/Dashboard/images/logos/google.svg" alt="logo" />
-            <span>Google</span>
+            <img class="h-5.5 w-5.5" src="../Public/Dashboard/images/google.svg" alt="logo" />
+            <a href="<?php echo $google_client->createAuthUrl(); ?>">  <span>Google</span></a>
           </button>
-          <button class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-            <img class="h-5.5 w-5.5" src="../Public/Dashboard/images/logos/github.svg" alt="logo" />
-            <span>Github</span>
-          </button>
+         
         </div>
-
  
         <div class="my-7 flex items-center space-x-3">
           <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>

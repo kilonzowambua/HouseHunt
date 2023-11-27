@@ -211,9 +211,7 @@ $results=mysqli_query($mysqli,$query);
   </div>
 
   <div id="x-teleport-target"></div>
-  <script>
-    window.addEventListener("DOMContentLoaded", () => Alpine.start());
-  </script>
+  <?php include('../Partial/dashoard/script.php'); ?>
 </body>
 
 

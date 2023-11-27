@@ -128,6 +128,9 @@ $results=mysqli_query($mysqli,$query);
                               <span>House Price(Ksh):</span>
                               <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" name="house_price" type="text" />
                             </label>
+                            <?php 
+                            if ($user_type == 'Administrator') { 
+                    ?>
                             <label class="block">
                               <span>Choose House Owner :</span>
                               <select name="house_user_id" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
@@ -145,6 +148,11 @@ $results=mysqli_query($mysqli,$query);
 
                               </select>
                             </label>
+                            <?php }else{ ?>
+
+                              <input class="form-input  w-full rounded-md border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" value="<?php echo $userID ?>" name="house_user_id" type="hidden" />
+
+                            <?php } ?>
                             <div class="space-x-2 text-right">
                               <button @click="showModal = false" class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
                                 Cancel
@@ -220,8 +228,12 @@ $results=mysqli_query($mysqli,$query);
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-                    ";
+                    if ($user_type == 'Administrator'){
+                      $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
+                    }else{
+                    $sql = "CALL ManageHouse('get_by_owner_id', NULL, $userID, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
+                    }
+                  
                     $result = mysqli_query($mysqli, $sql);
                     // Fetch all rows and store them as objects
                     #Count
@@ -399,9 +411,7 @@ $results=mysqli_query($mysqli,$query);
   </div>
 
   <div id="x-teleport-target"></div>
-  <script>
-    window.addEventListener("DOMContentLoaded", () => Alpine.start());
-  </script>
+  <?php include('../Partial/dashoard/script.php'); ?>
 </body>
 
 
