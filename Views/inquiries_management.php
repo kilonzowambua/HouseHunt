@@ -72,9 +72,11 @@ $results=mysqli_query($mysqli,$query);
 
             <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
               <div x-data="{showModal:false}">
+             <?php if ($user_type == 'Administrator'){ ?>
                 <button @click="showModal = true" class="btn bg-gradient-to-r from-sky-400 to-blue-600 p-0.5 font-medium">
                   <span class="btn bg-white dark:bg-navy-700"> Add inquiries House</span>
                 </button>
+                <?php } ?>
                 <template x-teleport="#x-teleport-target">
                   <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
                     <div class="absolute inset-0 bg-slate-900/60 transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
