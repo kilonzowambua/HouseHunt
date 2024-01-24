@@ -3,7 +3,7 @@ session_start();
 
 include('../Config/codeGen.php');
 include('../Config/config.php');
-include('../Helpers/auth.php');
+include('../Helpers/bookings_management.php');
 
 $userID = $_SESSION['user_id'];
 
@@ -107,19 +107,154 @@ if ($user = mysqli_fetch_object($results)) {
                 <div class="mt-1">
                 <a href="#" class="text-lg font-medium text-slate-700 hover:text-info focus:text-info dark:text-navy-100 dark:hover:text-accent-info dark:focus:text-accent-info">House Type:<?php echo $house_details->house_type ?></a>
               </div>
+     
+                <div class="mt-1">
+                <a href="#" class="text-lg font-medium text-slate-700 hover:text-info focus:text-info dark:text-navy-100 dark:hover:text-accent-info dark:focus:text-accent-info">Rent:Ksh.<?php echo $house_details->house_price ?>/per Month</a>
+              </div>
                 <p class="mt-1">
                 <?php echo $house_details->house_description ?>
                 </p>
-             
+                
               </div>
 
               <!-- Footer Blog Post -->
               <div class="mt-5 flex space-x-3">
-                <button class="btn space-x-2 rounded-full border border-slate-300 px-4 text-xs+ font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                <svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px" viewBox="0 0 32.00 32.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.576"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .puchipuchi_een{fill:#1c71d8;} </style> <path class="puchipuchi_een" d="M7,6c0-2.757,2.243-5,5-5s5,2.243,5,5c0,1.627-0.793,3.061-2,3.974V6c0-1.654-1.346-3-3-3 S9,4.346,9,6v3.974C7.793,9.061,7,7.627,7,6z M24,13c-1.104,0-2,0.896-2,2v-1c0-1.104-0.896-2-2-2s-2,0.896-2,2v-1 c0-1.104-0.896-2-2-2s-2,0.896-2,2V6c0-1.104-0.896-2-2-2s-2,0.896-2,2v10.277C9.705,16.106,9.366,16,9,16c-1.104,0-2,0.896-2,2v3 c0,0.454,0.155,0.895,0.438,1.249L11,28h12l2.293-3.293C25.682,24.318,26,23.55,26,23v-8C26,13.896,25.104,13,24,13z M11,29v1 c0,0.552,0.447,1,1,1h10c0.553,0,1-0.448,1-1v-1H11z"></path> </g></svg>
+              <div x-data="{showModal:false}">
+<?php if(!empty($house_details->house_description)){?>
+    <button
+      @click="showModal = true"
+      class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90"
+    >
+    <svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px" viewBox="0 0 32.00 32.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.576"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .puchipuchi_een{fill:#1c71d8;} </style> <path class="puchipuchi_een" d="M7,6c0-2.757,2.243-5,5-5s5,2.243,5,5c0,1.627-0.793,3.061-2,3.974V6c0-1.654-1.346-3-3-3 S9,4.346,9,6v3.974C7.793,9.061,7,7.627,7,6z M24,13c-1.104,0-2,0.896-2,2v-1c0-1.104-0.896-2-2-2s-2,0.896-2,2v-1 c0-1.104-0.896-2-2-2s-2,0.896-2,2V6c0-1.104-0.896-2-2-2s-2,0.896-2,2v10.277C9.705,16.106,9.366,16,9,16c-1.104,0-2,0.896-2,2v3 c0,0.454,0.155,0.895,0.438,1.249L11,28h12l2.293-3.293C25.682,24.318,26,23.55,26,23v-8C26,13.896,25.104,13,24,13z M11,29v1 c0,0.552,0.447,1,1,1h10c0.553,0,1-0.448,1-1v-1H11z"></path> </g></svg>
 
-                  <span>Book Now</span>
+<span>Book Now</span>
+    </button>
+    <?php } ?>
+    <template x-teleport="#x-teleport-target">
+      <div
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5"
+        x-show="showModal"
+        role="dialog"
+        @keydown.window.escape="showModal = false"
+      >
+        <div
+          class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300"
+          @click="showModal = false"
+          x-show="showModal"
+          x-transition:enter="ease-out"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="ease-in"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        ></div>
+        <div
+          class="relative max-w-lg rounded-lg bg-white px-4 py-10 text-center transition-opacity duration-300 dark:bg-navy-700 lg:px-5"
+          x-show="showModal"
+          x-transition:enter="ease-out"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="ease-in"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        >
+        
+        <div
+            class="flex justify-between rounded-t-lg bg-slate-200 px-6 py-6 dark:bg-navy-800 sm:px-5"
+          >
+            <h3 class="text-base font-medium text-slate-700 dark:text-navy-100">
+              Do what to Book   House No:<?php echo $house_details->house_no ?>: <?php echo $house_details->house_title ?> ?
+            </h3>
+            <button
+              @click="showModal = !showModal"
+              class="btn -mr-1.5 h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4.5 w-4.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="px-6 py-6 sm:px-5">
+            <p>
+             Please select Time and Date.
+            </p>
+            <form method="post">
+            <div class="mt-1 space-y-3 text-base font-medium text-slate-700 dark:text-navy-100">
+            <label>Select Time:</label>
+      <input hidden name="booking_house_onwer_id" value="<?php echo $house_details->house_user_id ?>"/>
+      <input hidden name="booking_user_id" value="<?php echo $userID ?>"/>
+      <input hidden name="booking_house_id" value="<?php echo $house_details->house_id ?>"/>
+   <input
+     name="booking_time"
+   x-init="$el._x_flatpickr = flatpickr($el,{inline:true,enableTime: true,noCalendar: true, dateFormat: 'h : m',defaultDate: dayjs().format('h : m')})"
+     class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+     placeholder="Choose time..."
+     type="text"
+   />
+
+   <label>Select Date:</label>
+  
+    <input
+    name="booking_date"
+      x-init="$el._x_flatpickr = flatpickr($el)"
+      class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+      placeholder="Choose date..."
+      type="text"
+    />
+    <span
+      class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 transition-colors duration-200"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+        />
+      </svg>
+    </span>
+  
+ 
+   
+          
+              <div class="space-x-2 text-right">
+                <button
+                  @click="showModal = false"
+                  class="btn min-w-[7rem] rounded-full border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90"
+                >
+                  Cancel
                 </button>
+                <button type="submit" name="add_booking"
+                  @click="showModal = false"
+                  class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                >
+                  Apply
+                </button>
+                  </form>
+              </div>
+            </div>
+        </div>
+      </div>
+    </template>
+  </div>
+               
                 
               </div>
             </div>
