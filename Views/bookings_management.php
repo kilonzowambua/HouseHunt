@@ -217,15 +217,21 @@ $results=mysqli_query($mysqli,$query);
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                         Booking Status
                       </th>
-
+                      <?php
+                      if ($user_type == 'Administrator'){ ?>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                         Action
                       </th>
+                      <?php } ?>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
+                    if($user_type == 'Administrator' || $user_type == 'House Owner'){
                     $sql = "CALL ManageBooking('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+                    }else{
+                      $sql = "CALL ManageBooking('get_all', NULL, NULL,'$user_id', NULL, NULL, NULL, NULL)";
+                    }
                     $result = mysqli_query($mysqli, $sql);
                     // Fetch all rows and store them as objects
                     #Count
@@ -259,9 +265,9 @@ $results=mysqli_query($mysqli,$query);
                           <?php echo $bookings->booking_status;  ?>
                         </td>
                         <?php 
-                        if($bookings->booking_status == 'Reserved' || $bookings->booking_status == 'Cancelled'){ ?>
+                        if( $user_type == 'Administrator' || $user_type == 'House Owner' || $bookings->booking_status == 'Reserved' || $bookings->booking_status == 'Cancelled'){ ?>
  <td class="whitespace-nowrap px-4 py-3 sm:px-5">Completed</td>
-                       <?php  }else { ?>
+                       <?php  }elseif ($user_type == 'Administrator' || $user_type == 'House Owner')  { ?>
                           <td class="px-4 py-3 sm:px-5">
                           <div>
                             <div x-data="{showModal:false}">
