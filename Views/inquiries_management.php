@@ -210,7 +210,7 @@ $results=mysqli_query($mysqli,$query);
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "CALL ManageInquiries('get_all', NULL, NULL, NULL, NULL);";
+                    $sql = "CALL ManageInquiries('get_all', NULL, NULL, NULL, NULL,NULL);";
                     $result = mysqli_query($mysqli, $sql);
                     // Fetch all rows and store them as objects
                     #Count
