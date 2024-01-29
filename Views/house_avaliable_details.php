@@ -32,6 +32,7 @@ if ($user = mysqli_fetch_object($results)) {
 
 
 
+
 <body x-data class="is-header-blur" x-bind="$store.global.documentBody">
   <!-- App preloader-->
   <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
@@ -125,7 +126,7 @@ if ($user = mysqli_fetch_object($results)) {
               <!-- Footer Blog Post -->
               <div class="mt-5 flex space-x-3">
                 <div x-data="{showModal:false}">
-                  <?php if (!empty($house_details->house_description)) { ?>
+                  <?php if (!empty($_GET['house']) && empty($_GET['booking_status'])) { ?>
                     <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
                       <svg version="1.1" id="Uploaded to svgrepo.com" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34px" height="34px" viewBox="0 0 32.00 32.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.576">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -142,7 +143,9 @@ if ($user = mysqli_fetch_object($results)) {
 
                       <span>Book Now</span>
                     </button>
-                  <?php } ?>
+                  <?php }elseif (!empty($_GET['house']) && !empty($_GET['booking_status'])) { ?>
+                   <u>Rate :</u><br> <div id="rateYo"></div>
+                 <?php } ?>
                   <template x-teleport="#x-teleport-target">
                     <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
                       <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
@@ -345,7 +348,7 @@ if ($user = mysqli_fetch_object($results)) {
   </div>
   </div>
   </main>
-<?php } ?>
+
 </div>
 
 <div id="x-teleport-target"></div>
@@ -370,8 +373,45 @@ if ($user = mysqli_fetch_object($results)) {
     });
   });
 </script>
+<!--Star Ratings -->
+<script>
+  $(document).ready(function () {
+    $("#rateYo").rateYo({
+        rating: 0,
+        starWidth: "25px",  // Adjust the size of the stars
+        fullStar: true,
+        numStars: 5,  // Set the number of stars
+        onChange: function (rating, rateYoInstance) {
+              // Get user_id and house_id from your PHP variables or other source
+              var rating_user_id = <?php echo $userID; ?>;
+            var rating_house_id = <?php echo $house_details->house_user_id; ?>;
+            var add_rating = '';
+            $.ajax({
+                type: "POST",
+                url: "../Helpers/ratings_management.php",  // Adjust the URL to your server script
+                data: {
+                    rating: rating,
+                    rating_user_id: rating_user_id,
+                    rating_house_id: rating_house_id,
+                    add_rating:add_rating
+                },
+                success: function (response) {
+                    // Handle the server response if needed
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
+});
 
 
+</script>
+
+<?php } ?>
 </body>
 
 </html>
