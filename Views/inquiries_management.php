@@ -268,7 +268,7 @@ $results=mysqli_query($mysqli,$query);
                                         </p>
                                         <label class="block">Enter Your Inquire Reply:</label>  
                                        <textarea name="inquiry_message_reply" id="Inquiry_Message" rows="4" placeholder=" Enter Text" class="form-textarea w-full rounded-lg border border-slate-300 bg-transparent p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
-                                        <button id="Reply" name="reply_inquiry" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
+                                        <button type="button" id="Reply" name="reply_inquiry" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
                                           Yes
                                         </button>
                                         <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
