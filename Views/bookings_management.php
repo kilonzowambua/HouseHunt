@@ -217,12 +217,11 @@ $results=mysqli_query($mysqli,$query);
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                         Booking Status
                       </th>
-                      <?php
-                      if ($user_type == 'Administrator'){ ?>
+                      
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                         Action
                       </th>
-                      <?php } ?>
+                    
                     </tr>
                   </thead>
                   <tbody>
@@ -265,8 +264,8 @@ $results=mysqli_query($mysqli,$query);
                           <?php echo $bookings->booking_status;  ?>
                         </td>
                         <?php 
-                        if( $user_type == 'Administrator' || $user_type == 'House Owner' || $bookings->booking_status == 'Reserved' || $bookings->booking_status == 'Cancelled'){ ?>
- <td class="whitespace-nowrap px-4 py-3 sm:px-5">Completed</td>
+                        if( $user_type == 'Administrator' || $user_type == 'House Owner' && $bookings->booking_status == 'Reserved' || $bookings->booking_status == 'Cancelled'){ ?>
+                           <td class="whitespace-nowrap px-4 py-3 sm:px-5">Completed</td>
                        <?php  }elseif ($user_type == 'Administrator' || $user_type == 'House Owner')  { ?>
                           <td class="px-4 py-3 sm:px-5">
                           <div>
@@ -320,14 +319,19 @@ $results=mysqli_query($mysqli,$query);
                           
                           </div>
                         </td>
+                        <?php }elseif ($user_type == 'House Seeker' && $bookings->booking_status == 'Reserved') { ?>
+                        <td class="px-4 py-3 sm:px-5">
+                        <a href="house_avaliable_details?house=<?php echo $bookings->house_id ?>&booking_status=<?php echo $bookings->booking_status ?>" class="btn px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                        <svg fill="#2ec27e" width="32px" height="32px" viewBox="-3.5 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>view</title> <path d="M12.406 13.844c1.188 0 2.156 0.969 2.156 2.156s-0.969 2.125-2.156 2.125-2.125-0.938-2.125-2.125 0.938-2.156 2.125-2.156zM12.406 8.531c7.063 0 12.156 6.625 12.156 6.625 0.344 0.438 0.344 1.219 0 1.656 0 0-5.094 6.625-12.156 6.625s-12.156-6.625-12.156-6.625c-0.344-0.438-0.344-1.219 0-1.656 0 0 5.094-6.625 12.156-6.625zM12.406 21.344c2.938 0 5.344-2.406 5.344-5.344s-2.406-5.344-5.344-5.344-5.344 2.406-5.344 5.344 2.406 5.344 5.344 5.344z"></path> </g>
+                      </svg>
+                        </a>
+                        </td>
 
                        <?php } ?>
                         
                       </tr>
                     <?php }}
                     ?>
-
-
 
                   </tbody>
                 </table>

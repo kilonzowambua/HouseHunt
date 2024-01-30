@@ -67,7 +67,7 @@ $results=mysqli_query($mysqli,$query);
       </div>
       <div class="grid grid-cols-1 gap-4 sm:gap-5 lg:gap-6">
         <!-- From HTML Table -->
-        <div class="card pb-8">
+        <div class="card pb-4">
           <div class="my-3 flex h-8 items-center justify-between px-4 sm:px-5">
 
             <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper && (isShowPopper = false)" class="inline-flex">
@@ -99,7 +99,7 @@ $results=mysqli_query($mysqli,$query);
                               <span>Choose House No :</span>
                               <select name="house_no" id="house_no" class="form-select  w-full rounded-md border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
                                 <?php
-                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
+                                $sql = "CALL ManageHouse('get_all', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL);";
                                 $result = mysqli_query($mysqli, $sql);
                                 // Check if there are multiple result sets
                                 if (mysqli_more_results($mysqli)) {
@@ -168,7 +168,7 @@ $results=mysqli_query($mysqli,$query);
               </div>
             </div>
           </div>
-          <div>
+          <div class="ml-4 mr-4">
             <div x-data x-init="$el._x_grid =  new Gridjs.Grid({
                 from: $refs.table,
                 sort: true,
@@ -178,9 +178,9 @@ $results=mysqli_query($mysqli,$query);
                 },
                 search: true,
               }).render($refs.wrapper);">
-              <div class="is-scrollbar-hidden min-w-full overflow-x-auto">
+              <div class="is-scrollbar-hidden min-w-full overflow-x-auto px-6">
 
-                <table x-ref="table" class="w-full text-left table-container">
+                <table x-ref="table" id="InquiryTable" class="table-container">
                   <thead>
                     <tr>
                       <th class="whitespace-nowrap bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
@@ -210,7 +210,7 @@ $results=mysqli_query($mysqli,$query);
                   </thead>
                   <tbody>
                     <?php
-                    $sql = "CALL ManageInquiries('get_all', NULL, NULL, NULL, NULL,NULL);";
+                    $sql = "CALL ManageInquiries('get_all',NULL,NULL, NULL, NULL,NULL);";
                     $result = mysqli_query($mysqli, $sql);
                     // Fetch all rows and store them as objects
                     #Count
@@ -240,8 +240,88 @@ $results=mysqli_query($mysqli,$query);
                         <td class="whitespace-nowrap px-4 py-3 sm:px-5">
                           <?php echo $inquiry->inquiry_created_on;  ?>
                         </td>
+                        <?php
+                        #HOUSE ONWER CAN REPLY
+                        if($user_type == 'House Owner' && $inquiry->owner_id = $user_id && empty($inquiry->inquiry_message_reply)){
+                        ?>
+                        <td class="px-2 py-3 sm:px-5">
+                          <div>
+                          <div x-data="{showModal:false}">
+                              <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-primary-500 dark:text-primary-50 dark:hover:bg-primary-450 dark:focus:bg-primary-450 dark:active:bg-primary-450/90  d-inline-block mt-2">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                              <template x-teleport="#x-teleport-target">
+                                <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
+                                  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+                                  <div class="relative max-w-lg rounded-lg bg-white px-4 py-4 text-center transition-opacity duration-300 dark:bg-navy-700 sm:px-5" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                                    
 
-                        <td class="px-4 py-3 sm:px-5">
+                                    <div mb-1 >
+                                      <h2 class="text-2xl text-slate-700 dark:text-navy-100 mb-2">
+                                        Reply Inquire
+                                      </h2>
+                                     
+                                      <form method="post" id="ReplyForm">
+                                        <input type="hidden" value="<?php echo $inquiry->inquiry_id;  ?>" id="InquiryId" name="inquiry_id">
+                                        <p   rows="4" class="w-full rounded-lg border border-slate-300 border-white p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent">
+                                        <?php echo $inquiry->inquiry_message;  ?> 
+                                        </p>
+                                        <label class="block">Enter Your Inquire Reply:</label>  
+                                       <textarea name="inquiry_message_reply" id="Inquiry_Message" rows="4" placeholder=" Enter Text" class="form-textarea w-full rounded-lg border border-slate-300 bg-transparent p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
+                                        <button type="button" id="Reply" name="reply_inquiry" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
+                                          Yes
+                                        </button>
+                                        <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
+                                          Close
+                                        </button>
+                                      </form>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </template>
+                            </div>
+
+                          </div>
+            
+                       
+                          <div x-data="{showModal:false}">
+                              <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90 d-inline-block mt-2">
+                                <i class="fa fa-trash"></i>
+                              </button>
+                              <template x-teleport="#x-teleport-target">
+                                <div class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-4 py-6 sm:px-5" x-show="showModal" role="dialog" @keydown.window.escape="showModal = false">
+                                  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur transition-opacity duration-300" @click="showModal = false" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+                                  <div class="relative max-w-lg rounded-lg bg-white px-4 py-7 text-center transition-opacity duration-300 dark:bg-navy-700 sm:px-5" x-show="showModal" x-transition:enter="ease-out" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                                    <img width="3500" height="3500" src="../Public/Dashboard/images/illustrations/questions-animate.svg" alt="image" />
+
+                                    <div mb-1 >
+                                      <h2 class="text-2xl text-slate-700 dark:text-navy-100">
+                                        Delete this Inquiry
+                                      </h2>
+                                      <p style="color:red;" class="mt-1 text-color:Red;">
+                                        .Warning,Once Inquiry is Deleted, Can not be recovered,Are you Sure?
+                                      </p>
+                                      <form method="post">
+                                        <input type="hidden" value="<?php echo $inquiry->inquiry_id;  ?>" name="inquiry_id">
+                                        <button type="submit" name="delete_inquiry" class="btn mt-6 bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
+                                          Yes
+                                        </button>
+                                        <button @click="showModal = false" class="btn mt-6 bg-success font-medium text-white hover:bg-success-focus focus:bg-success-focus active:bg-success-focus/90">
+                                          Close
+                                        </button>
+                                      </form>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </template>
+                            </div>
+
+                          </div>
+                        </td>
+                        <?php } else { ?>
+                          <td class="px-6 py-3 sm:px-5">
                           <div>
                           <div x-data="{showModal:false}">
                               <button @click="showModal = true" class="btn bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
@@ -278,9 +358,9 @@ $results=mysqli_query($mysqli,$query);
 
                           </div>
                         </td>
+                        <?php } ?>
                       </tr>
-                    <?php }}
-                    ?>
+                    <?php }}?>
 
 
 
@@ -308,7 +388,7 @@ $results=mysqli_query($mysqli,$query);
   <div id="x-teleport-target"></div>
   <?php include('../Partial/dashoard/script.php'); ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+  <!-- Get House Details -->
   <script>
     $(document).ready(function() {
       $('#house_no').change(function() {
@@ -335,6 +415,39 @@ $results=mysqli_query($mysqli,$query);
       });
     });
   </script>
+  <!--Add Inquire Reply -->
+  <script>
+    $(document).ready(function(){
+        $("#Reply").click(function(){
+            // Get form data
+            var formData = $("#ReplyForm").serialize();
+
+            // Perform Ajax request
+            $.ajax({
+                type: "POST",
+                url: "../Helpers/inquiries_management.php",
+                data: formData,
+                success: function(response){
+                // Extract the content of #InquiryTable from the response
+                var updatedContent = $(response).find("#InquiryTable").html();
+
+                // Replace the content only if it exists
+                if (updatedContent !== undefined && updatedContent !== null) {
+                    $("#InquiryTable").html(updatedContent);
+                } else {
+                    // Handle error or unexpected response
+                    console.error("Unexpected or empty response from the server.");
+                }
+            },
+            error: function(xhr, status, error){
+                // Handle Ajax errors
+                console.error("Ajax request failed: " + status + "\nError: " + error);
+            }
+        });
+    });
+});
+
+</script>
 
 </body>
 

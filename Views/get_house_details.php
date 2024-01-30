@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         $response = array(
             'house_id' => $row["house_id"],
-            'house_user_id' => $row["house_user_id"],
+            'house_user_id' =>$row["house_user_id"],
             'house_title' => $row["house_title"],
             'house_type' => $row["house_type"],
             'house_location' => $row["house_location"],
